@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h2 {
+        color: #007bff;
+        text-align: center;
+    }
+
+    table {
+        width: 50%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        display: block;
+        margin-top: 20px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+<body>
+
+<h2>User Details</h2>
+
+<table>
+    <tr>
+        <td>ID:</td>
+        <td th:text="${user.id}"></td>
+    </tr>
+    <tr>
+        <td>Username:</td>
+        <td th:text="${user.username}"></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td th:text="${user.email}"></td>
+    </tr>
+    <tr>
+        <td>Prenom:</td>
+        <td th:text="${user.prenom}"></td>
+    </tr>
+    <tr>
+        <td>Telephone:</td>
+        <td th:text="${user.telephone}"></td>
+    </tr>
+    <tr>
+        <td>Adresse:</td>
+        <td th:text="${user.adresse}"></td>
+    </tr>
+</table>
+
+<a th:href="@{/users}">Back to User List</a>
+
+</body>
+</html>

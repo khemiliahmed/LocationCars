@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Book</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: red;
+            text-align: center;
+        }
+
+        form {
+            width: 60%;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50; /* Fond vert pour le bouton */
+            color: #ffffff; /* Texte blanc pour le bouton */
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Fond vert plus foncé au survol */
+        }
+
+
+        select {
+            appearance: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            color: #555;
+            font-size: 16px;
+        }
+
+        select:hover {
+            border-color: #888;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+<h1>Add New Car</h1>
+<form th:action="@{/cars/add}" th:object="${newCar}" method="post">
+    <label for="brand">brand:</label>
+    <input type="text" id="brand" name="brand" th:field="*{brand}" required>
+
+    <label for="model">model:</label>
+    <input type="text" id="model" name="model" th:field="*{model}" required>
+
+    <label for="serie">Serie:</label>
+    <input type="text" id="serie" name="serie" th:field="*{serie}" required>
+
+     <label>Fuel Type:
+    <select th:field="*{fuelType}" required>
+        <option value="Essence">Essence</option>
+        <option value="Gazoil">Gazoil</option>
+        <option value="Electrique">Electrique</option>
+    </select>
+</label><br>
+
+    <label>Status:
+        <select th:field="*{status}" required>
+            <option value="AVAILABLE">Available</option>
+            <option value="BOOKED">Booked</option>
+            <option value="REPAIR">Under Repair</option>
+        </select>
+    </label><br>
+
+    <label for="dayPrice">dayPrice:</label>
+    <input type="number" id="dayPrice" name="dayPrice" th:field="*{dayPrice}" required>
+
+    <label for="imageUrl">imageUrl:</label>
+    <input type="file" id="imageUrl" name="status" th:field="*{imageUrl}" required>
+
+    <label for="description">description:</label>
+    <input type="text" id="description" name="description" th:field="*{description}" required>
+
+    <label for="category">Categorie:</label>
+    <select id="category" name="category" th:field="*{categorie}" required>
+        <option value="" disabled selected>Choisissez une catégorie</option>
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.nom}"></option>
+    </select>
+
+    <button type="submit">Add Book</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Car</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4; /* Couleur de fond gris clair */
+        }
+
+        h2 {
+            color: #007bff; /* Couleur bleue pour le titre */
+            text-align: center; /* Centrer le texte */
+        }
+
+        form {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff; /* Fond blanc pour le formulaire */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Légère ombre */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc; /* Bordure grise */
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #28a745; /* Couleur verte pour le bouton */
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            display: block;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        select:hover {
+            border-color: #888;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Edit Car</h2>
+
+<form th:action="@{/cars/update/{id}(id=${car.id})}" th:object="${car}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Brand: <input type="text" th:field="*{brand}" required/></label><br>
+    <label>Model: <input type="text" th:field="*{model}" required/></label><br>
+    <label>Serie: <input type="text" th:field="*{serie}" required/></label><br>
+    <label>Fuel Type:
+        <select th:field="*{fuelType}" required>
+            <option value="Essence">Essence</option>
+            <option value="Gazoil">Gazoil</option>
+            <option value="Electrique">Electrique</option>
+        </select>
+    </label><br>
+    <label>Status:
+        <select th:field="*{status}" required>
+            <option value="AVAILABLE">Available</option>
+            <option value="BOOKED">Booked</option>
+            <option value="REPAIR">Under Repair</option>
+        </select>
+    </label><br>
+    <label>Day Price: <input type="number" th:field="*{dayPrice}" required/></label><br>
+    <label>Image URL: <input type="file" th:field="*{imageUrl}" required/></label><br>
+    <label>Description: <textarea th:field="*{description}" required></textarea></label><br>
+    <label for="category">Categorie:</label>
+    <select id="category" name="category" th:field="*{categorie}" required>
+        <option value="" disabled selected>Choisissez une catégorie</option>
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.nom}"></option>
+    </select><br>
+    <br>
+
+    <button type="submit">Update Car</button>
+</form>
+
+<a th:href="@{/cars}">Back to Car List</a>
+
+</body>
+</html>
